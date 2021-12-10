@@ -44,8 +44,6 @@ class SchedulerServiceTest {
         //TODO: hacer una subscripción de el servicio reactivo
         Flux<ProgramDate> response = schedulerService.generateCalendar(programId, startDate);
 
-        StepVerifier.create(response).expectNextCount(13).expectComplete(); //DONE: hacer de otro modo
-
         //DONE: hacer de otro modo
         StepVerifier.create(response)
                 .expectNextMatches(programDate -> {
@@ -102,6 +100,7 @@ class SchedulerServiceTest {
                 })
                 .verifyComplete();
 
+        StepVerifier.create(response).expectNextCount(13).verifyComplete(); //DONE: hacer de otro modo
         Mockito.verify(repository).findById(programId);
     }
 
